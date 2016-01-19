@@ -8,11 +8,13 @@
     "start": "node run-server.js"
   },
   "engines": {
-     "node": ">=4"
+    "node": ">=4"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "unmockedModulePathPatterns": ["core-js/.*"]
+    "unmockedModulePathPatterns": [
+      "core-js/.*"
+    ]
   },
   "config": {},
   "dependencies": {
@@ -30,5 +32,8 @@
     "github": "^0.2.4",
     "jest-cli": "^0.7.1",
     "minimatch": "^3.0.0"
+  },
+  "devDependencies": {
+    "dotenv": "^1.2.0"
   }
 }
