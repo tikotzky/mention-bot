@@ -105,6 +105,16 @@ async function work(body) {
     console.error(e);
   }
 
+  if (data.action === 'synchronize') {
+    github.issues.createComment({
+      user: data.repository.owner.login, // 'fbsamples'
+      repo: data.repository.name, // 'bot-testing'
+      number: data.pull_request.number, // 23
+      body: `@${data.sender.login} updated the pull request.`
+    });
+    return;
+  }
+
   if (data.action !== 'opened') {
     console.log(
       'Skipping because action is ' + data.action + '.',
