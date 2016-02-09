@@ -19,6 +19,8 @@ var util = require('util');
 
 var GitHubApi = require('github');
 
+var warningMessage = '<!-- WARNING ANY MODIFICATION OF THIS MESSAGE WILL BE TRACKED -->\n';
+
 var CONFIG_PATH = '.mention-bot';
 
 if (!process.env.GITHUB_TOKEN) {
@@ -78,6 +80,7 @@ function buildMentionSentence(reviewers) {
 
 function defaultMessageGenerator(reviewers) {
   return util.format(
+    warningMessage +
     'By analyzing the blame information on this pull request' +
      ', we identified %s to be%s potential reviewer%s',
      buildMentionSentence(reviewers),
@@ -110,7 +113,7 @@ async function work(body) {
       user: data.repository.owner.login, // 'fbsamples'
       repo: data.repository.name, // 'bot-testing'
       number: data.pull_request.number, // 23
-      body: `@${data.sender.login} updated the pull request.`
+      body: `${warningMessage}@${data.sender.login} updated the pull request.`
     });
     return;
   }
